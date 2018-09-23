@@ -1,0 +1,126 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 14.09.2018, 9:55:55
+    Author     : hp
+*/
+
+.result {
+    -ms-flex-preferred-size: 90vw;
+        flex-basis: 90vw;
+    max-width: 1000px;
+    margin-top: 2vw;
+}
+.content {
+    -ms-flex-preferred-size: 100%;
+         flex-basis: 100%;
+    background-color: #fff;
+}
+.result__content {
+    margin-bottom:  1vw;
+}
+.date {
+    -ms-flex-preferred-size: 96%;
+         flex-basis: 96%;
+}
+.content__date {
+    margin-top: 1%;
+}
+.outdoorImgDate{
+    min-width: 12.2rem;  
+}
+.outdoorImgDate--hover:hover, .outdoorImgCount--hover:hover{
+     cursor: url(../img/cursor.png), pointer;
+}
+.outdoorImg{
+    padding-right: 10%;
+}
+.outdoorImg__img {
+    height: 2rem;
+}
+.docs {
+    -ms-flex-preferred-size: 86%;
+         flex-basis: 86%;
+}
+.content__docs {
+    margin-bottom: 3%;
+}
+.doc{
+    -ms-flex-preferred-size: 100%;
+         flex-basis: 100%;
+    border-bottom: 1px solid  #CCDCE8;
+}
+.docs__doc{
+    margin-top: 4%;
+}
+.outdoorTypeSum{
+    -ms-flex-preferred-size: 100%;
+         flex-basis: 100%;
+}
+.doc__outdoorTypeSum{
+    -ms-flex-preferred-size: 100%;
+         flex-basis: 100%;
+    margin-bottom: 2%;
+}
+.outdoorImgCount{
+    -ms-flex-preferred-size: 100%;
+         flex-basis: 100%;
+}
+.outdoorImgCount__outdoorImg{
+    padding-right: 2%;
+}
+.img-arrow {
+    height: 1.5rem;
+}
+.doc__products {
+    margin-top: 2%;
+}
+.product {
+    -ms-flex-preferred-size: 80%;
+         flex-basis: 80%;
+    padding: 1% 0;
+    color: black
+}
+.products__product {
+    margin-left: 4%;
+}
+.img-product {
+    height: 5rem;
+}
+.product__img-product {
+    margin-right: 2rem;
+}
+.outdoorNameCount{
+    -ms-flex-preferred-size: 70%;
+     flex-basis: 70%
+}
+.name {
+    -ms-flex-preferred-size: 100%;
+         flex-basis: 100%;
+}
+.outdoorNameCount__name {
+    margin-bottom: 2%;
+}
+.calculation {
+    -ms-flex-preferred-size: 100%;
+        flex-basis: 100%;
+}
+/* классы отображения/скытия блоков блоков*/
+.hidden {
+   overflow-y: hidden;
+   max-height: 0px;
+}
+.visible{
+    max-height: 10000px;
+    -webkit-transition: max-height 2.0s;
+         -o-transition: max-height 2.0s;
+         transition: max-height 2.0s;
+}
+.rotate{
+    -webkit-transform: rotateZ(-180deg);
+        -ms-transform: rotate(-180deg);
+         transform: rotateZ(-180deg);
+}

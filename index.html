@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>List documents</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="img/folder.png" type="image/x-icon">
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/flex.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/media.css">
+        <script type ="text/javascript" src="handlebars.js"></script>
+         <script id="entry-template" type="text/x-handlebars-template">
+            {{#each arr}}
+            <div class = "content result__content flex-row-wr-center">
+                    <div class = "date content__date flex-row-wr-space flex-colomn-center-w576">
+                         <div class = "outdoorImgDate outdoorImgDate--hover flex-row-nwr-start" onClick = "visible(event,'data-date')">
+                             <div data-date = "{{date}}" class = "outdoorImg date__outdoorImg flex-row-wr-center">
+                                 <img id = "img{{date}}" data-date = "{{date}}"  src="img/arrow-date.png" alt= "__" class = "outdoorImg__img">
+                              </div>
+                             <h2 data-date = "{{date}}">{{date}}</h2>
+                         </div>
+                         <h2 class ="flex-order-1-w576 flex-column-center-w350"><span>Документов: {{docs.length}}</span> <span>({{sum}} &#8381)</span></h2>
+                     </div>
+                     <div id = "{{date}}" class = "docs content__docs flex-row-wr-center hidden">
+                         {{#each docs}}
+                         <div class = "doc docs__doc flex-row-wr-cente">
+                             <h3 class = "outdoorTypeSum doc__outdoorTypeSum flex-row-wr-space flex-colomn-center-w576">
+                                 <span>{{type}} №{{number}}</span>
+                                 <span>{{sum}} &#8381</span>
+                             </h3>
+                             <div class = "outdoorImgCount outdoorImgCount--hover  flex-row-nwr-start flex-center-w576" onClick = "visible(event,'data-doc')">
+                                 <div data-doc = "{{number}}" class = "outdoorImgCount__outdoorImg">
+                                 <img id = "img{{number}}"  data-doc = "{{number}}" src="img/down-arrow.png" alt= "__"  class = "img-arrow">
+                                 </div>
+                                 <h4 data-doc = "{{number}}">Товаров: {{products.length}}</h4>
+                             </div>            
+                         <div id = "{{number}}" class = "doc__products flex-row-wr-start hidden">
+                            {{#each products}}
+                            <div class = "product products__product flex-row-nwr-space flex-aling-center">
+                                <object data="{{image}}" type="image/png" class ="img-product product__img-product">
+                                <img src="img/forbidden.png" alt="img" class ="img-product product__img-product">
+                                </object>
+                                <div class = "outdoorNameCount flex-row-wr-start flex-end-w400">
+                                    <h4 class = "name outdoorNameCount__name flex-right-w400">{{product_name}}</h4>
+                                    <p class = "calculation flex-row-wr-space flex-column-end-w400">
+                                        <span>{{numb}} шт. &#215 {{price}} &#8381</span>
+                                        <span>{{sum}}&#8381</span>
+                                    </p>
+                                 </div>
+                             </div>
+                            {{/each}}
+                         </div> 
+                     </div>  
+                     {{/each}}
+                      </div>
+                 </div>
+            {{/each}}
+        </script>       
+    </head>
+    <body class="flex-row-wr-center">
+        <div id="result" class = "result flex-row-wr-center"></div>
+        <script type="text/javascript" src="sqlite.js"></script>
+        <script type="text/javascript" src="index.js"></script>
+    </body>
+</html>

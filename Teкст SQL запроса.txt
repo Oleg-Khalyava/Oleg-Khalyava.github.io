@@ -1,0 +1,9 @@
+SELECT docs.date, docTypes.name AS document, docs.id AS document_id, products.image, products.name AS product,
+products.price, rows.quantity, products.removed
+    FROM docs LEFT OUTER JOIN rows ON docs.id=rows.docId, docTypes, products
+       WHERE docs.typeId = docTypes.id
+        AND rows.productId = products.id
+        AND docs.removed = false
+        AND docTypes.removed = false
+        AND rows.removed=false
+        ORDER BY docs.date

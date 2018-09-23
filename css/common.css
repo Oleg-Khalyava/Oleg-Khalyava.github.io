@@ -1,0 +1,16 @@
+*{
+    -webkit-box-sizing: border-box;
+     box-sizing: border-box;
+}
+body {
+     color:#848C91;
+     font-weight: bold;
+     background-color: #CCDCE8;
+}
+h2 {
+    font-size: 1.7rem;
+}
+h3 {font-size: 1.3rem;
+}
+h4 {font-size: 1.1rem;
+    }
