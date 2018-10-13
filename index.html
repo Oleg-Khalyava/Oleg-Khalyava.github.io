@@ -14,15 +14,17 @@ and open the template in the editor.
         <link rel="stylesheet" href="css/common.css">
         <link rel="stylesheet" href="css/flex.css">
         <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/media.css">
-        <script type ="text/javascript" src="handlebars.js"></script>
-         <script id="entry-template" type="text/x-handlebars-template">
+        <link rel="stylesheet" href="css/media.css">      
+    </head>
+    <body class="flex-row-wr-center">
+        <div id="result" class = "result flex-row-wr-center"></div>
+        <script id="entry-template" type="text/x-handlebars-template">
             {{#each arr}}
             <div class = "content result__content flex-row-wr-center">
                     <div class = "date content__date flex-row-wr-space flex-colomn-center-w576">
-                         <div class = "outdoorImgDate outdoorImgDate--hover flex-row-nwr-start" onClick = "visible(event,'data-date')">
-                             <div data-date = "{{date}}" class = "outdoorImg date__outdoorImg flex-row-wr-center">
-                                 <img id = "img{{date}}" data-date = "{{date}}"  src="img/arrow-date.png" alt= "__" class = "outdoorImg__img">
+                         <div class = "outdoor-img-date outdoo-img-date--hover flex-row-nwr-start" onClick = "visible(event,'data-date','data-doc')">
+                             <div data-date = "{{date}}" class = "outdoor-img date__outdoor-img flex-row-wr-center">
+                                 <img id = "img{{date}}" data-date = "{{date}}"  src="img/arrow-date.png" alt= "__" class = "outdoor-img__img">
                               </div>
                              <h2 data-date = "{{date}}">{{date}}</h2>
                          </div>
@@ -30,13 +32,13 @@ and open the template in the editor.
                      </div>
                      <div id = "{{date}}" class = "docs content__docs flex-row-wr-center hidden">
                          {{#each docs}}
-                         <div class = "doc docs__doc flex-row-wr-cente">
-                             <h3 class = "outdoorTypeSum doc__outdoorTypeSum flex-row-wr-space flex-colomn-center-w576">
+                         <div class = "doc docs__doc flex-row-wr-cente" data-doc = "{{number}}">
+                             <h3 class = "outdoor-type-sum doc__outdoor-type-sum flex-row-wr-space flex-colomn-center-w576">
                                  <span>{{type}} №{{number}}</span>
                                  <span>{{sum}} &#8381</span>
                              </h3>
-                             <div class = "outdoorImgCount outdoorImgCount--hover  flex-row-nwr-start flex-center-w576" onClick = "visible(event,'data-doc')">
-                                 <div data-doc = "{{number}}" class = "outdoorImgCount__outdoorImg">
+                             <div class = "outdoor-img-count outdoor-img-count--hover  flex-row-nwr-start flex-center-w576" onClick = "visible(event,'data-doc')">
+                                 <div data-doc = "{{number}}" class = "outdoor-img-count__outdoor-img">
                                  <img id = "img{{number}}"  data-doc = "{{number}}" src="img/down-arrow.png" alt= "__"  class = "img-arrow">
                                  </div>
                                  <h4 data-doc = "{{number}}">Товаров: {{products.length}}</h4>
@@ -47,8 +49,8 @@ and open the template in the editor.
                                 <object data="{{image}}" type="image/png" class ="img-product product__img-product">
                                 <img src="img/forbidden.png" alt="img" class ="img-product product__img-product">
                                 </object>
-                                <div class = "outdoorNameCount flex-row-wr-start flex-end-w400">
-                                    <h4 class = "name outdoorNameCount__name flex-right-w400">{{product_name}}</h4>
+                                <div class = "outdoor-name-count flex-row-wr-start flex-end-w400">
+                                    <h4 class = "name outdoor-name-count__name flex-right-w400">{{product_name}}</h4>
                                     <p class = "calculation flex-row-wr-space flex-column-end-w400">
                                         <span>{{numb}} шт. &#215 {{price}} &#8381</span>
                                         <span>{{sum}}&#8381</span>
@@ -62,10 +64,8 @@ and open the template in the editor.
                       </div>
                  </div>
             {{/each}}
-        </script>       
-    </head>
-    <body class="flex-row-wr-center">
-        <div id="result" class = "result flex-row-wr-center"></div>
+        </script> 
+        <script type ="text/javascript" src="handlebars.js"></script>
         <script type="text/javascript" src="sqlite.js"></script>
         <script type="text/javascript" src="index.js"></script>
     </body>

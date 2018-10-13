@@ -17,7 +17,7 @@ function parseDate (item){
 /*
 объявление функции представления числа по разрядам и замены символа дробной части 
  */
-function split_point (n){
+function splitPoint (n){
     let m = n.split(".");
     m[0] = m[0].replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
     n = m.join(",");
@@ -47,9 +47,9 @@ function  Document (item){
 function  Product (item){
     this.image = item[3];
     this.product_name = item[4];
-    this.price = split_point(item[5].toFixed(2));
+    this.price = splitPoint(item[5].toFixed(2));
     this.numb = item[6];
-    this.sum = split_point((item[5]*item[6]).toFixed(2));
+    this.sum = splitPoint((item[5]*item[6]).toFixed(2));
     this.removed = item[7];
 };
 /*
@@ -72,14 +72,14 @@ for (let i = 0; i<rows.length; i++){
                 for (let a = 0; a<docsNew.length; a++){
                     if (docsNew[a].number === doc.number){
                         docsNew[a].products.push(product);
-                        docsNew[a].sum = split_point(roundToFixed(docsNew[a].sum,product.sum,2));
+                        docsNew[a].sum = splitPoint(roundToFixed(docsNew[a].sum,product.sum,2));
                         presenсeDocumetn = true;
                         break
                     };
                 };
                 if (!presenсeDocumetn){
                     doc.products.push(product);
-                    doc.sum = split_point(roundToFixed(doc.sum,product.sum,2));
+                    doc.sum = splitPoint(roundToFixed(doc.sum,product.sum,2));
                     dtNew.docs.push(doc);
                 };
                 presenсeDt = true;
@@ -89,13 +89,13 @@ for (let i = 0; i<rows.length; i++){
         };
         if (!presenсeDt){
             doc.products.push(product);
-            doc.sum = split_point(roundToFixed(doc.sum,product.sum,2));
+            doc.sum = splitPoint(roundToFixed(doc.sum,product.sum,2));
             dt.docs.push(doc);
             arr.push(dt);
         };
     }
     else {doc.products.push(product);
-          doc.sum = split_point(roundToFixed(doc.sum,product.sum,2));
+          doc.sum = splitPoint(roundToFixed(doc.sum,product.sum,2));
           dt.docs.push(doc);
           arr.push(dt);
          };
@@ -104,7 +104,7 @@ for (let i = 0; i<arr.length; i++){
     let dtNew =arr[i];
     let docsNew = dtNew.docs; 
     for (let a = 0; a<docsNew.length;a++){
-    dtNew.sum =split_point(roundToFixed(dtNew.sum,docsNew[a].sum,2));    
+    dtNew.sum =splitPoint(roundToFixed(dtNew.sum,docsNew[a].sum,2));    
     };
 };
 return arr;
@@ -132,12 +132,30 @@ document.getElementById('result').innerHTML = html;
 /*
  обработка событий
  */
-function visible (event,data_name){
+function visible (event,data_name, data_name_hidden){
+    /*объявление функции изменени янаправления стрелки при отражении /скрытии блока*/
+    let changeArrow = function(id){
+        let arrow = document.getElementById("img"+id);
+        arrow.classList.toggle("rotate");
+    };
     let id = event.target.getAttribute(data_name);
-    /*отображение/скрытие блока*/
+    /*отображение/скрытие блока и изменение направления стрелки указателя*/
     let obj = document.getElementById(id);
     obj.classList.toggle("visible");
-    /*изменение направления стрелки при оторажении/скрытии блока*/
-    let arrow = document.getElementById("img"+id);
-    arrow.classList.toggle("rotate");
+    changeArrow(id)
+    /*скрытие дочернего блока при скрытии родительского*/
+    if (arguments.length === 3){
+        if (!obj.classList.contains("visible")){
+              let children = obj.children;
+              for (let i = 0; i<children.length; i++){
+              let id = children[i].getAttribute(data_name_hidden);
+              let object = document.getElementById(id);
+              let list = object.classList;
+              if (list.contains("visible")){
+                  list.remove("visible");
+                  changeArrow(id);
+                }
+            }
+       }
+    }
 };

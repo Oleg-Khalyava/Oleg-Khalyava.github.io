@@ -29,16 +29,16 @@ and open the template in the editor.
 .content__date {
     margin-top: 1%;
 }
-.outdoorImgDate{
+.outdoor-img-date{
     min-width: 12.2rem;  
 }
-.outdoorImgDate--hover:hover, .outdoorImgCount--hover:hover{
+.outdoor-img-date--hover:hover, .outdoor-img-count--hover:hover{
      cursor: url(../img/cursor.png), pointer;
 }
-.outdoorImg{
+.outdoor-img{
     padding-right: 10%;
 }
-.outdoorImg__img {
+.outdoor-img__img {
     height: 2rem;
 }
 .docs {
@@ -56,20 +56,20 @@ and open the template in the editor.
 .docs__doc{
     margin-top: 4%;
 }
-.outdoorTypeSum{
+.outdoor-type-sum{
     -ms-flex-preferred-size: 100%;
          flex-basis: 100%;
 }
-.doc__outdoorTypeSum{
+.doc__outdoor-type-sum{
     -ms-flex-preferred-size: 100%;
          flex-basis: 100%;
     margin-bottom: 2%;
 }
-.outdoorImgCount{
+.outdoor-img-count{
     -ms-flex-preferred-size: 100%;
          flex-basis: 100%;
 }
-.outdoorImgCount__outdoorImg{
+.outdoor-img-count__outdoor-img{
     padding-right: 2%;
 }
 .img-arrow {
@@ -93,7 +93,7 @@ and open the template in the editor.
 .product__img-product {
     margin-right: 2rem;
 }
-.outdoorNameCount{
+.outdoor-name-count{
     -ms-flex-preferred-size: 70%;
      flex-basis: 70%
 }
@@ -101,7 +101,7 @@ and open the template in the editor.
     -ms-flex-preferred-size: 100%;
          flex-basis: 100%;
 }
-.outdoorNameCount__name {
+.outdoor-name-count__name {
     margin-bottom: 2%;
 }
 .calculation {
