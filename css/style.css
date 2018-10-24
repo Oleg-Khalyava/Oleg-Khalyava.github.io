@@ -20,7 +20,7 @@ and open the template in the editor.
     background-color: #fff;
 }
 .result__content {
-    margin-bottom:  1vw;
+    margin-bottom:  0.4vw;
 }
 .date {
     -ms-flex-preferred-size: 96%;
@@ -30,28 +30,35 @@ and open the template in the editor.
     margin-top: 1%;
 }
 .outdoor-img-date{
-    min-width: 12.2rem;  
+    min-width: 12.2rem;
+    margin-left: 0.8rem
 }
 .outdoor-img-date--hover:hover, .outdoor-img-count--hover:hover{
      cursor: url(../img/cursor.png), pointer;
 }
 .outdoor-img{
-    padding-right: 10%;
+    padding:0.3rem 10% 0 0;
 }
 .outdoor-img__img {
-    height: 2rem;
+    height: 1.0rem
 }
 .docs {
-    -ms-flex-preferred-size: 86%;
-         flex-basis: 86%;
-}
-.content__docs {
-    margin-bottom: 3%;
-}
-.doc{
     -ms-flex-preferred-size: 100%;
          flex-basis: 100%;
-    border-bottom: 1px solid  #CCDCE8;
+}
+.border {
+    border-bottom: 1px solid  rgb(230,230,230);
+    width: 100%
+}
+.border:last-of-type {
+    border-bottom: none
+}
+.content__docs {
+    margin-bottom: 3.0%;
+}
+.doc{
+    -ms-flex-preferred-size: 86%;
+         flex-basis: 86%;
 }
 .docs__doc{
     margin-top: 4%;
@@ -68,19 +75,21 @@ and open the template in the editor.
 .outdoor-img-count{
     -ms-flex-preferred-size: 100%;
          flex-basis: 100%;
+     margin-left: 0.5rem
 }
 .outdoor-img-count__outdoor-img{
-    padding-right: 2%;
+    padding-right: 1.0%;
 }
 .img-arrow {
-    height: 1.5rem;
+    height: 0.7rem;
+    padding-top: 0.1rem
 }
 .doc__products {
     margin-top: 2%;
 }
 .product {
-    -ms-flex-preferred-size: 80%;
-         flex-basis: 80%;
+    -ms-flex-preferred-size: 94%;
+         flex-basis: 94%;
     padding: 1% 0;
     color: black
 }
@@ -94,19 +103,22 @@ and open the template in the editor.
     margin-right: 2rem;
 }
 .outdoor-name-count{
-    -ms-flex-preferred-size: 70%;
-     flex-basis: 70%
+    -ms-flex-preferred-size: 75%;
+     flex-basis: 75%
 }
 .name {
     -ms-flex-preferred-size: 100%;
          flex-basis: 100%;
 }
 .outdoor-name-count__name {
-    margin-bottom: 2%;
+    margin-bottom: 3%;
 }
 .calculation {
     -ms-flex-preferred-size: 100%;
         flex-basis: 100%;
+}
+.grow-size {
+    font-size: 1.7rem;
 }
 /* классы отображения/скытия блоков блоков*/
 .hidden {

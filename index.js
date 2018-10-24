@@ -1,147 +1,146 @@
-/* 
+ /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-/*объявление функции преобразовывания эл. массива (дата) формата "2017-11-29 18:29:00" к формату "29 ноября, 
- */
-function parseDate (item){
-    let month = ["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"];
-    let dt = new Date(item[0].split(" ")[0]);
-    let newDt = dt.getDate()+ " "+ month[dt.getMonth()];
-    item[0]= newDt;
-};
-/*
-Объявление функции поиска пустых ссылок на картинки с продуктами и замена уссылкой
-на универсальную картинку
-*/
-function changeImg (item){
-    if (item[3]===null){
-    item[3]="img/forbidden.png";
-    };
-};
-/*
-объявление функции представления числа по разрядам и замены символа дробной части 
- */
-function splitPoint (n){
-    let m = n.split(".");
-    m[0] = m[0].replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
-    n = m.join(",");
-    return n;
-};
-/*объявление функции суммирования числа и строкового представления числа в формате (10 000, 10), 
- либо двух строковых  представлений, f - кол. знаков дробной части*/
-function roundToFixed(first,second,fl){
-    first = first.toString().split(' ').join("").replace(",",".");
-    second = second.toString().split(' ').join("").replace(",",".");
-    return (parseFloat(first)+parseFloat(second)).toFixed(fl);
-};
-/*
- объявление конструкторов объектов: Дата, Документ, Продукт
- */
-function  Dt (item){
-    this.date = item[0];
-    this.docs = [];
-    this.sum =0;
-};
-function  Document (item){
+/* global sqlite, Handlebars */
+//Конструкторы
+// создает объект на основании данных полученныч из БД, изменяя представления некоторых значений
+function joinObject(item){
+    this.date = parseDate(item[0]);
     this.type = item[1];
     this.number = item[2];
-    this.products = [];
-    this.sum = 0;
-};
-function  Product (item){
-    this.image = item[3];
-    this.product_name = item[4];
-    this.price = splitPoint(item[5].toFixed(2));
+    this.image = compareNull(item[3],"img/forbidden.png");
+    this.productName = item[4];
+    this.price = item[5];
     this.numb = item[6];
-    this.sum = splitPoint((item[5]*item[6]).toFixed(2));
-    this.removed = item[7];
+    this.existence = item[7];
+}
+//создает объект, хранаящий информацию относительно даты
+function  Dt (item){
+    this.date = item.date;
+    this.sum =0;
+    this.docs = [];
 };
-/*
- * обвление функции преобразования структуры данных, полученных из БД для последующего рендеринга
- */
-function modify(rows){
-let arr = [];
-for (let i = 0; i<rows.length; i++){
-    let item = rows[i];
-    let dt = new Dt(item);
-    let doc = new Document(item);
-    let product = new Product(item);
-    let presenсeDt = false;
-    let presenсeDocumetn = false;
-    if (arr.length>0){
-        for (let i = 0; i<arr.length; i++){
-            if(arr[i].date === dt.date){
-                let dtNew = arr[i];
-                let docsNew = dtNew.docs;
-                for (let a = 0; a<docsNew.length; a++){
-                    if (docsNew[a].number === doc.number){
-                        docsNew[a].products.push(product);
-                        docsNew[a].sum = splitPoint(roundToFixed(docsNew[a].sum,product.sum,2));
-                        presenсeDocumetn = true;
-                        break
-                    };
-                };
-                if (!presenсeDocumetn){
-                    doc.products.push(product);
-                    doc.sum = splitPoint(roundToFixed(doc.sum,product.sum,2));
-                    dtNew.docs.push(doc);
-                };
-                presenсeDt = true;
-                break;
-            };
-            
-        };
-        if (!presenсeDt){
-            doc.products.push(product);
-            doc.sum = splitPoint(roundToFixed(doc.sum,product.sum,2));
-            dt.docs.push(doc);
-            arr.push(dt);
-        };
-    }
-    else {doc.products.push(product);
-          doc.sum = splitPoint(roundToFixed(doc.sum,product.sum,2));
-          dt.docs.push(doc);
-          arr.push(dt);
-         };
+//создает объект, хрянящий информацию относительно документа 
+function  Document (item){
+    this.type = item.type;
+    this.number = item.number;
+    this.sum = 0;
+    this.products = [];
 };
-for (let i = 0; i<arr.length; i++){
-    let dtNew =arr[i];
-    let docsNew = dtNew.docs; 
-    for (let a = 0; a<docsNew.length;a++){
-    dtNew.sum =splitPoint(roundToFixed(dtNew.sum,docsNew[a].sum,2));    
+//создает объект, хранящий информацию относительно продукта
+function  Product (item){
+    this.image = item.image;
+    this.productName = item.productName;
+    this.price = item.price;
+    this.numb = item.numb;
+    this.sum = item.price*item.numb;
+    this.existence = item.existence;
+};
+//Функции
+// функция преобразования даты
+function parseDate (item){
+    var month = ["Января","Февраля","Марта","Апреля","Мая","Июня","Июля","Августа","Сентября","Октября","Ноября","Декабря"];
+    var dt = new Date(item.split(" ")[0]);
+    var newDt = dt.getDate()+ " "+ month[dt.getMonth()];
+    return newDt;
+};
+//функция проверки соответсвия первого аргумента значению null, при соответсвии заменяется вторым аргументом
+//(используется в поиске пустых ссылок на картинки с продуктами и замене ссылкой на универсальную картинку)
+function compareNull (item, changeItem){
+ if (item===null){return changeItem;}
+ else {return item;}
+};
+function creatJoinObject(item){
+    return new joinObject(item);
+};
+function creatProduct (item){
+    return new Product(item);
+};
+function creatDocument(item){
+    var product = creatProduct(item);
+    var doc = new Document(item);
+    doc.products.push(product);
+    doc.sum+=product.sum;
+    return doc;
+};
+function creatDt (item){
+     var doc = creatDocument(item);
+     var dt = new Dt(item);
+     dt.docs.push(doc);
+     dt.sum+=doc.sum;
+    return dt;
+};
+//функция, сравнивающая значение свойства number объекта  с переданным парметром, при соотвествии возвращает true 
+//(использование в качестве call back функции)
+function compareNumber(number){
+    return function (item){
+        return item.number ===number;
     };
 };
-return arr;
+//функция, сравнивающее значение свойства date объекта  с переданным парметром, при соотвествии возвращает true
+//(использование в качестве call back функции)
+function compareDate(date){
+    return function (item){
+        return item.date ===date;
+    };
 };
-/*
- получение данных из JSON
-*/
-let rows = sqlite.rows;
-/*
-преобразование формата отображения даты
-*/
-rows.forEach(parseDate);
-/*
-замена пустых ссылок ссылкой на универсальную картинку
-*/
-rows.forEach(changeImg);
-/*
-создание новой структруты данных для последущего рендеринга
+/* функция создает структуру (массив объектов типа Dt) для последующего рендеринга (функция принимает массив объектов типа joinObject:
+ - создается массив arrDate (для хранения объектов типа Dt)
+ - запускается цикл для проверки каждого объекта типа joinObject в массиве, полученном функцией в качестве параметра, некоторым условиям:
+ 1. если массив arrDate пустой, то создается объект типа Dt и добавляется в массив;
+ 2. если массив arrDate содержит эл. то проверяется соответсвие свойства date для каждого объекта массива arrDate и
+ и объекта joinObject. если соотвествий нет, то создается новый объект типа Dt и добавляется в массив arrDate
+ 3. при нахождении соответсвия (date) проверяется соотвествие для свойства number для каждого объекта типа Document в массиве, 
+ являющемся свойство docs объекта date  и свойства number объекта joinObject, если соответсвия нет, то создается 
+ объект типа Document и добавляется в массив docs объекта date, если соответствие есть (document), то создается 
+ объект типа Product и добавляется в массив продуктов, являющимся свойством products объекта document
+ -функция возвращает массив объектов типа Dt (arrDate)
  */
-let arrObjDate = modify(rows);
-/*
-компиляция шаблона
-*/
-let source   = document.getElementById('entry-template').innerHTML;
-let template = Handlebars.compile(source);
-let context = {arr: arrObjDate};
-let html = template(context);
-document.getElementById('result').innerHTML = html;
-/*
- обработка событий
- */
+function createStructure(arr){
+    var arrDate = [];
+    function addDt (jointObject){
+        arrDate.push(creatDt(joinObject));
+    };
+    for (var i =0; i<arr.length; i++){
+        var joinObject = arr[i]; 
+        if (arrDate.length === 0){
+            addDt(joinObject);
+        }
+        else {
+            var filterArrDate =arrDate.filter(compareDate(joinObject.date));
+            if (filterArrDate.length === 0){
+            addDt(joinObject);
+            }
+            else {
+                var date = filterArrDate[0];
+                var filterArrDocs = date.docs.filter(compareNumber(joinObject.number));
+                if (filterArrDocs.length ===0){
+                    var doc = creatDocument(joinObject);
+                    date.docs.push(doc);
+                    date.sum+=doc.sum;
+                }
+                else{
+                    var document = filterArrDocs[0];
+                    var product = creatProduct(joinObject);
+                    document.products.push(product);
+                    document.sum+=product.sum;
+                    date.sum+=product.sum;
+                };
+            };
+        };
+    };
+    return arrDate;
+};
+//helper handlebars, преобразует число к требуемому формату
+Handlebars.registerHelper("categoryNumber", function(number) {
+    let m = number.toFixed(2).split(".");
+    m[0] = m[0].replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+    number = m.join(",");
+    return number;
+});
+//обработчик события
 function visible (event,data_name, data_name_hidden){
     /*объявление функции изменени янаправления стрелки при отражении /скрытии блока*/
     let changeArrow = function(id){
@@ -152,7 +151,7 @@ function visible (event,data_name, data_name_hidden){
     /*отображение/скрытие блока и изменение направления стрелки указателя*/
     let obj = document.getElementById(id);
     obj.classList.toggle("visible");
-    changeArrow(id)
+    changeArrow(id);
     /*скрытие дочернего блока при скрытии родительского*/
     if (arguments.length === 3){
         if (!obj.classList.contains("visible")){
@@ -164,8 +163,16 @@ function visible (event,data_name, data_name_hidden){
               if (list.contains("visible")){
                   list.remove("visible");
                   changeArrow(id);
-                }
-            }
-       }
-    }
+                };
+            };
+       };
+    };
 };
+//получение данных и создание структуры для послед. рендеринга
+var structure = createStructure(sqlite.rows.map(creatJoinObject));
+//получение шаблона и рендеринг (Handlebars)
+let source   = document.getElementById('entry-template').innerHTML;
+let template = Handlebars.compile(source);
+let context = {arr: structure};
+let html = template(context);
+document.getElementById('result').innerHTML = html;
