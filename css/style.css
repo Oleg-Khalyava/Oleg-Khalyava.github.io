@@ -10,13 +10,13 @@ and open the template in the editor.
 
 .result {
     -ms-flex-preferred-size: 90vw;
-        flex-basis: 90vw;
+            flex-basis: 90vw;
     max-width: 1000px;
     margin-top: 2vw;
 }
 .content {
     -ms-flex-preferred-size: 100%;
-         flex-basis: 100%;
+            flex-basis: 100%;
     background-color: #fff;
 }
 .result__content {
@@ -24,7 +24,7 @@ and open the template in the editor.
 }
 .date {
     -ms-flex-preferred-size: 96%;
-         flex-basis: 96%;
+            flex-basis: 96%;
 }
 .content__date {
     margin-top: 1%;
@@ -44,7 +44,7 @@ and open the template in the editor.
 }
 .docs {
     -ms-flex-preferred-size: 100%;
-         flex-basis: 100%;
+            flex-basis: 100%;
 }
 .border {
     border-bottom: 1px solid  rgb(230,230,230);
@@ -58,23 +58,23 @@ and open the template in the editor.
 }
 .doc{
     -ms-flex-preferred-size: 86%;
-         flex-basis: 86%;
+            flex-basis: 86%;
 }
 .docs__doc{
     margin-top: 4%;
 }
 .outdoor-type-sum{
     -ms-flex-preferred-size: 100%;
-         flex-basis: 100%;
+            flex-basis: 100%;
 }
 .doc__outdoor-type-sum{
     -ms-flex-preferred-size: 100%;
-         flex-basis: 100%;
+            flex-basis: 100%;
     margin-bottom: 2%;
 }
 .outdoor-img-count{
     -ms-flex-preferred-size: 100%;
-         flex-basis: 100%;
+            flex-basis: 100%;
      margin-left: 0.5rem
 }
 .outdoor-img-count__outdoor-img{
@@ -89,7 +89,7 @@ and open the template in the editor.
 }
 .product {
     -ms-flex-preferred-size: 94%;
-         flex-basis: 94%;
+            flex-basis: 94%;
     padding: 1% 0;
     color: black
 }
@@ -104,18 +104,18 @@ and open the template in the editor.
 }
 .outdoor-name-count{
     -ms-flex-preferred-size: 75%;
-     flex-basis: 75%
+            flex-basis: 75%
 }
 .name {
     -ms-flex-preferred-size: 100%;
-         flex-basis: 100%;
+            flex-basis: 100%;
 }
 .outdoor-name-count__name {
     margin-bottom: 3%;
 }
 .calculation {
     -ms-flex-preferred-size: 100%;
-        flex-basis: 100%;
+            flex-basis: 100%;
 }
 .grow-size {
     font-size: 1.7rem;
@@ -128,11 +128,11 @@ and open the template in the editor.
 .visible{
     max-height: 10000px;
     -webkit-transition: max-height 2.0s;
-         -o-transition: max-height 2.0s;
          transition: max-height 2.0s;
 }
 .rotate{
     -webkit-transform: rotateZ(-180deg);
-        -ms-transform: rotate(-180deg);
-         transform: rotateZ(-180deg);
+       transform: rotateZ(-180deg);
 }
+
+   

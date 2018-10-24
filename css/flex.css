@@ -13,10 +13,10 @@ and open the template in the editor.
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
-         flex-wrap: wrap;
+            flex-wrap: wrap;
     -webkit-box-pack: center;
          -ms-flex-pack: center;
-         justify-content: center;
+            justify-content: center;
 }
 .flex-row-nwr-center{
     display: -webkit-box;
@@ -24,7 +24,7 @@ and open the template in the editor.
          display: flex;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
-         justify-content: center;
+            justify-content: center;
 }
 .flex-row-nwr-start{
     display: -webkit-box;
@@ -32,17 +32,17 @@ and open the template in the editor.
          display: flex;
     -webkit-box-pack: start;
         -ms-flex-pack: start;
-        justify-content: flex-start;
+            justify-content: flex-start;
 }
 .flex-row-wr-start{
     display: -webkit-box;
          display: -ms-flexbox;
          display: flex;
     -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+            flex-wrap: wrap;
     -webkit-box-pack: start;
         -ms-flex-pack: start;
-         justify-content: flex-start;
+            justify-content: flex-start;
 }
 .flex-row-nwr-space{
     display: -webkit-box;
@@ -50,22 +50,22 @@ and open the template in the editor.
          display: flex;
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
-        justify-content: space-between;
+            justify-content: space-between;
 }
 .flex-row-wr-space{
     display: -webkit-box;
          display: -ms-flexbox;
          display: flex;
     -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+            flex-wrap: wrap;
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
-        justify-content: space-between;
+            justify-content: space-between;
 }
 .flex-aling-center {
     -webkit-box-align: center;
         -ms-flex-align: center;
-        align-items: center;
+            align-items: center;
         -ms-flex-line-pack: center;
-        align-content: center
+                align-content: center
 }
